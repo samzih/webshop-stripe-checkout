@@ -3,7 +3,7 @@ import { Card, Button, Row, Col, Container } from 'react-bootstrap';
 import { useCartContext } from '../context/CartContext';
 
 function Cart() {
-  const { cartItems, setCartItems } = useCartContext();
+  const { cartItems, setCartItems, cartTotalPrice } = useCartContext();
 
   console.log(cartItems);
 
@@ -35,6 +35,8 @@ function Cart() {
     <>
       <div>Cart</div>
 
+
+      <h1>Totalpris: {cartTotalPrice} kr</h1>
 
       <Button onClick={handlePayment}>GÖR ETT KÖP</Button>
     </>
