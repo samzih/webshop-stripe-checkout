@@ -38,7 +38,7 @@ function Home() {
                                 <Card.Img style={{ width: "150px" }} variant="top" src={product.images[0]} />
                                 <Card.Body>
                                     <Card.Title>{product.name}</Card.Title>
-                                    <Card.Subtitle>{product.default_price.unit_amount}</Card.Subtitle>
+                                    <Card.Subtitle>{`${product.default_price.unit_amount / 100} kr`}</Card.Subtitle>
                                     <Card.Text>{product.description}</Card.Text>
                                     <Button onClick={() => handleClick(product)} variant="secondary">Add to cart</Button>
                                 </Card.Body>
