@@ -1,4 +1,5 @@
-const stripe = require('stripe')(process.env.SECRET_STRIPE_KEY);
+const { initStripe } = require('../stripe');
+const stripe = initStripe();
 const CLIENT_URL = 'http://localhost:5173';
 
 
