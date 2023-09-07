@@ -25,6 +25,7 @@ function NavigationBar() {
         {/* If the user is loggedin then show <Navbar.Text>Signed in as...</Navbar.Text> otherwise show the login btn */}
         <Nav>
           <Button>Logga in</Button>
+          <div className='vr ms-3' />
           <Nav.Link as={Link} to='/cart'>
             <BsCart3 size={25} />
             <Badge bg="success" pill style={{ position: "relative", bottom: "10px", right: "15px" }}>{totalQuantity}</Badge>
