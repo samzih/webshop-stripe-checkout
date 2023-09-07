@@ -1,9 +1,17 @@
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, Container, Button, } from 'react-bootstrap';
+import { Navbar, Nav, Container, Button, Badge } from 'react-bootstrap';
 import { BsCart3 } from 'react-icons/bs';
 import logo from '../assets/company-logo.svg';
+import { useCartContext } from '../context/CartContext';
 
 function NavigationBar() {
+  const { cartItems } = useCartContext();
+
+  // Calculates the total quantity of items in cart
+  const totalQuantity = cartItems.reduce((accumulator, currentItem) => {
+    return accumulator + currentItem.quantity;
+  }, 0);
+
   return (
       <Navbar className="bg-body-tertiary mb-5">
 
@@ -19,6 +27,7 @@ function NavigationBar() {
           <Button>Logga in</Button>
           <Nav.Link as={Link} to='/cart'>
             <BsCart3 size={25} />
+            <Badge bg="success" pill style={{ position: "relative", bottom: "10px", right: "15px" }}>{totalQuantity}</Badge>
           </Nav.Link>
         </Nav>
 
