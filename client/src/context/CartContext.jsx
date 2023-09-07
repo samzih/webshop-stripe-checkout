@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 const CartContext = createContext({
     cartItems: [],
@@ -9,7 +10,7 @@ const CartContext = createContext({
 export const useCartContext = () => useContext(CartContext);
 
 const CartProvider = ({ children }) => {
-    const [cartItems, setCartItems] = useState([]);
+    const [cartItems, setCartItems] = useLocalStorage("shopping-cart", []);
 
     // Calculate total price of all cart items (incl. quantity)
     const cartTotalPrice = cartItems.reduce((acc, currentItem) => (
