@@ -3,6 +3,6 @@ const router = express.Router();
 const { listAllProducts } = require('../controllers/products.controller');
 
 // Checkout routes defined
-router.get('/products', listAllProducts);
+router.get('/', listAllProducts);
 
 module.exports = router;
