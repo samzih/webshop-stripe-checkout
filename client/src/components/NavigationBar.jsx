@@ -3,9 +3,11 @@ import { Navbar, Nav, Container, Button, Badge } from 'react-bootstrap';
 import { BsCart3 } from 'react-icons/bs';
 import logo from '../assets/company-logo.svg';
 import { useCartContext } from '../context/CartContext';
+import { useUserContext } from '../context/UserContext';
 
 function NavigationBar() {
   const { cartItems } = useCartContext();
+  const { showModal, setModalMode } = useUserContext();
 
   // Calculates the total quantity of items in cart
   const totalQuantity = cartItems.reduce((accumulator, currentItem) => {
@@ -24,7 +26,7 @@ function NavigationBar() {
 
         {/* If the user is loggedin then show <Navbar.Text>Signed in as...</Navbar.Text> otherwise show the login btn */}
         <Nav>
-          <Button>Logga in</Button>
+          <Button onClick={() => { showModal(); setModalMode("login"); }}>Logga in</Button>
           <div className='vr ms-3' />
           <Nav.Link as={Link} to='/cart'>
             <BsCart3 size={25} />
