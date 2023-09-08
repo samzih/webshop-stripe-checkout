@@ -15,7 +15,7 @@ function Cart() {
   console.log(cart);
 
   async function handlePayment() {
-      const response = await fetch('/api/create-checkout-session', {
+      const response = await fetch('/api/checkout/create-session', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',

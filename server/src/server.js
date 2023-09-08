@@ -22,7 +22,7 @@ app.use(express.json());
 
 
 // Use included routes
-app.use('/api/create-checkout-session', checkoutRouter);
+app.use('/api/checkout', checkoutRouter);
 
 app.use('/api/products', productsRouter);
 
