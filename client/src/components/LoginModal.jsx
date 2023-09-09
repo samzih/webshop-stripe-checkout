@@ -7,8 +7,21 @@ import { useUserContext } from '../context/UserContext';
 import { Container } from 'react-bootstrap';
 import { TbLogin } from 'react-icons/tb';
 
+
 function LoginModal() {
-    const { show, setShow, closeModal, showModal, modalMode, setModalMode } = useUserContext();
+    const { show, setShow, closeModal, showModal, modalMode, setModalMode, registerUser } = useUserContext();
+
+
+    const handleRegister = (e) => {
+        // Prevent the browser from reloading the page
+        e.preventDefault();
+        
+        // If built in browser validation passes then register user
+        if (e.currentTarget.checkValidity()) {
+            registerUser(e);
+        }
+    }
+
 
     return (
         <>
@@ -23,11 +36,11 @@ function LoginModal() {
                                     </Modal.Header>
                                     <Modal.Body>
                                         <Form>
-                                            <Form.Group className="mb-3" controlId="loginForm.ControlInput1">
+                                            <Form.Group className="mb-3">
                                                 <Form.Label>Email</Form.Label>
                                                 <Form.Control type="email" placeholder="namn@exempel.se" autoFocus />
                                             </Form.Group>
-                                            <Form.Group className="mb-3" controlId="loginForm.ControlInput2">
+                                            <Form.Group className="mb-3">
                                                 <Form.Label>Lösenord</Form.Label>
                                                 <Form.Control type="password" as="input" />
                                             </Form.Group>
@@ -53,18 +66,18 @@ function LoginModal() {
                                         <Modal.Title>Registrera dig</Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
-                                        <Form>
-                                            <Form.Group className="mb-3" controlId="registerForm.ControlInput1">
+                                        <Form id='register-form' onSubmit={handleRegister}>
+                                            <Form.Group className="mb-3">
                                                 <Form.Label>Namn</Form.Label>
-                                                <Form.Control type="text" placeholder="John Doe" autoFocus />
+                                                <Form.Control required name='name' type="text" placeholder="John Doe" autoFocus />
                                             </Form.Group>
-                                            <Form.Group className="mb-3" controlId="registerForm.ControlInput2">
+                                            <Form.Group className="mb-3">
                                                 <Form.Label>Email</Form.Label>
-                                                <Form.Control type="email" placeholder="namn@exempel.se" />
+                                                <Form.Control required name='email' type="email" placeholder="namn@exempel.se" />
                                             </Form.Group>
-                                            <Form.Group className="mb-3" controlId="registerForm.ControlInput3">
+                                            <Form.Group className="mb-3">
                                                 <Form.Label>Lösenord</Form.Label>
-                                                <Form.Control type="password" as="input" />
+                                                <Form.Control required name='password' type="password" />
                                             </Form.Group>
                                         </Form>
                                     </Modal.Body>
@@ -74,7 +87,7 @@ function LoginModal() {
                                                 <div className='me-auto fw-medium text-muted' style={{ cursor: "pointer" }} onClick={() => setModalMode('login')}>
                                                     <TbLogin /> Logga in
                                                 </div>
-                                                <Button variant="primary" onClick={closeModal}>Registrera dig</Button>
+                                                <Button variant="primary" form='register-form' type='submit'>Registrera dig</Button>
                                             </Stack>
                                         </Container>
                                     </Modal.Footer>

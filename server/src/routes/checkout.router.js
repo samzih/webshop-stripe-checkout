@@ -3,6 +3,6 @@ const router = express.Router();
 const { initStripeSession } = require('../controllers/checkout.controller');
 
 // Checkout routes defined
-router.post('/', initStripeSession);
+router.post('/create-session', initStripeSession);
 
 module.exports = router;
