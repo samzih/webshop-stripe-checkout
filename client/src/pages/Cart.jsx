@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Card, Button, Row, Col, Container, Stack, Image } from 'react-bootstrap';
 import { useCartContext } from '../context/CartContext';
+import { Link } from "react-router-dom";
 
 function Cart() {
   const { cartItems, setCartItems, cartTotalPrice } = useCartContext();
@@ -33,6 +34,22 @@ function Cart() {
   
   return (
     <>
+    {cart.length < 1 ? 
+    (
+      <Container fluid className="d-flex align-items-center justify-content-center" style={{ minHeight: '80vh' }}>
+      <Card className="text-center">
+        <Card.Header as="h5">Cart ikon här</Card.Header>
+        <Card.Body>
+          <p>Din varukorg är för nuläget tom.</p>
+          <Button variant="primary" as={Link} to='/'>
+            Fortsätt handla
+          </Button>
+        </Card.Body>
+      </Card>
+    </Container>
+    ) 
+    : 
+    (
       <Stack className="d-flex align-items-center" direction="vertical" gap={3}>
 
         <h1>Din kundvagn</h1>
@@ -55,9 +72,13 @@ function Cart() {
 
         <h1>Totalpris: {cartTotalPrice} kr</h1>
 
-      </Stack>
 
-      <Button onClick={handlePayment}>GÖR ETT KÖP</Button>
+
+        <Button onClick={handlePayment}>GÖR ETT KÖP</Button>
+
+      </Stack>
+    )
+    }
     </>
   )
 }
