@@ -13,9 +13,10 @@ const initStripeSession = async (req, res) => {
                         quantity: item.quantity
                     }
                 )),
+                allow_promotion_codes: true,
                 mode: 'payment',
                 success_url: `${CLIENT_URL}/confirmation`,
-                cancel_url: `${CLIENT_URL}/`,
+                cancel_url: `${CLIENT_URL}/cart`,
             });
 
             res.status(200).json({ url: session.url });
