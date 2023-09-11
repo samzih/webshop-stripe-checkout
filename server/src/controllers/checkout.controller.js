@@ -13,6 +13,7 @@ const initStripeSession = async (req, res) => {
                         quantity: item.quantity
                     }
                 )),
+                customer: req.session.id,
                 allow_promotion_codes: true,
                 mode: 'payment',
                 success_url: `${CLIENT_URL}/confirmation`,
