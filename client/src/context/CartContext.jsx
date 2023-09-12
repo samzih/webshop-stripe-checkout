@@ -10,7 +10,7 @@ const CartContext = createContext({
 export const useCartContext = () => useContext(CartContext);
 
 const CartProvider = ({ children }) => {
-    const [cartItems, setCartItems] = useLocalStorage("shopping-cart", []);
+    const [cartItems, setCartItems] = useLocalStorage('cart', []);
 
     // Calculate total price of all cart items (incl. quantity)
     const cartTotalPrice = cartItems.reduce((acc, currentItem) => (

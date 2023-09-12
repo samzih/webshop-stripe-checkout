@@ -35,4 +35,35 @@ const createCustomer = async (req, res) => {
 
 }
 
-module.exports = { createCustomer };
+const verifyLogin = async (req, res) => {
+
+    const { email, password } = req.body;
+
+    // Read users from DB
+    const users = JSON.parse(await readFile(usersDB, 'utf-8'));
+
+    // Find the user with the matching login request email
+    const user = users.find(user => user.email === email);
+
+    // If the user (email) exists in the DB, check/compare password
+    if (user) {
+        const correctPassword = await bcrypt.compare(password, user.password);
+        if (correctPassword) {
+            delete user.password;
+            req.session = user;
+            console.log(req.session);
+            res.status(200).json(req.session);
+        } else {
+            res.status(401).json({ message: 'Failed to login due to wrong password' });
+        }
+    }
+
+}
+
+const logoutUser = (req, res) => {
+    // Clears the cookie
+    req.session = null; 
+    res.status(200).json(req.session);
+}
+
+module.exports = { createCustomer, verifyLogin, logoutUser };

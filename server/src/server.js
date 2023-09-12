@@ -2,6 +2,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const cookieSession = require('cookie-session');
 
 // Include routes
 const checkoutRouter = require('./routes/checkout.router');
@@ -19,6 +20,14 @@ app.use(cors({
 }));
 
 app.use(express.json());
+
+app.use(cookieSession({
+    name: 'session',
+    keys: ['s3cR3tK3y'],
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    secure: false,
+    httpOnly: true,
+}));
 
 
 // Use included routes

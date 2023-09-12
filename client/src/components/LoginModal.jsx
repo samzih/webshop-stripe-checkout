@@ -9,7 +9,7 @@ import { TbLogin } from 'react-icons/tb';
 
 
 function LoginModal() {
-    const { show, setShow, closeModal, showModal, modalMode, setModalMode, registerUser } = useUserContext();
+    const { show, setShow, closeModal, showModal, modalMode, setModalMode, registerUser, loginUser } = useUserContext();
 
 
     const handleRegister = (e) => {
@@ -19,6 +19,16 @@ function LoginModal() {
         // If built in browser validation passes then register user
         if (e.currentTarget.checkValidity()) {
             registerUser(e);
+        }
+    }
+
+    const handleLogin = (e) => {
+        // Prevent the browser from reloading the page
+        e.preventDefault();
+
+        // If built in browser validation passes then try to login user
+        if (e.currentTarget.checkValidity()) {
+            loginUser(e);
         }
     }
 
@@ -35,14 +45,14 @@ function LoginModal() {
                                         <Modal.Title>Logga in</Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
-                                        <Form>
+                                        <Form id='login-form' onSubmit={handleLogin}>
                                             <Form.Group className="mb-3">
                                                 <Form.Label>Email</Form.Label>
-                                                <Form.Control type="email" placeholder="namn@exempel.se" autoFocus />
+                                                <Form.Control name='email' required type="email" placeholder="namn@exempel.se" autoFocus />
                                             </Form.Group>
                                             <Form.Group className="mb-3">
                                                 <Form.Label>Lösenord</Form.Label>
-                                                <Form.Control type="password" as="input" />
+                                                <Form.Control name='password' required type="password" as="input" />
                                             </Form.Group>
                                         </Form>
                                     </Modal.Body>
@@ -52,7 +62,7 @@ function LoginModal() {
                                                 <div className='me-auto fst-italic' style={{ color: "darkblue", cursor: "pointer" }} onClick={() => setModalMode("register")}>
                                                     eller registrera dig...
                                                 </div>
-                                                <Button variant="primary" onClick={closeModal}>Logga in</Button>
+                                                <Button variant="primary" form='login-form' type='submit'>Logga in</Button>
                                             </Stack>
                                         </Container>
                                     </Modal.Footer>
