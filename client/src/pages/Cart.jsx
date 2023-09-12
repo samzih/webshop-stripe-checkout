@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { Card, Button, Row, Col, Container, Stack, Image } from 'react-bootstrap';
 import { useCartContext } from '../context/CartContext';
+import { useUserContext } from '../context/UserContext';
 import { Link } from "react-router-dom";
 
 function Cart() {
   const { cartItems, setCartItems, cartTotalPrice } = useCartContext();
+  const { userData, setModalMode, showModal } = useUserContext();
 
   console.log(cartItems);
 
@@ -32,7 +34,12 @@ function Cart() {
       sessionStorage.setItem('stripe-session-id', sessionId);
       window.location = url;
   }
-  
+
+  const handleClick = (mode) => {
+    setModalMode(mode);
+    showModal();
+  }
+
   return (
     <>
     {cart.length < 1 ? 
@@ -74,8 +81,19 @@ function Cart() {
         <h1>Totalpris: {cartTotalPrice} kr</h1>
 
 
-
-        <Button onClick={handlePayment}>GÖR ETT KÖP</Button>
+        {userData ? 
+        <Button onClick={handlePayment}>Till kassan</Button>
+        :
+        <>
+        <Stack gap={2} className='mx-auto'>
+          <p>För att kunna gå vidare till kassan måste du vara inloggad</p>
+          <Stack direction='horizontal' gap={2} className='mx-auto'>
+            <Button onClick={() => handleClick('login')}>Logga in</Button>
+            <div onClick={() => handleClick('register')}>eller <span className='me-auto fw-semibold' style={{cursor: 'pointer', color: 'darkblue'}}>registrera dig</span></div>
+          </Stack>
+        </Stack>
+        </>
+        }
 
       </Stack>
     )
