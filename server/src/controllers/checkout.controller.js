@@ -1,6 +1,8 @@
 const { initStripe } = require('../stripe');
 const stripe = initStripe();
 const CLIENT_URL = 'http://localhost:5173';
+const { readFile, writeFile } = require('fs/promises');
+const ordersDB = './src/db/orders.json';
 
 
 const initStripeSession = async (req, res) => {
@@ -69,12 +71,9 @@ const verifyStripeSession = async (req, res) => {
         console.log('order', order);
 
         // Save the order to DB
-        
-
-        
-
-
-
+        const ordersData = JSON.parse(await readFile(ordersDB, 'utf-8'));
+        ordersData.push(order);
+        await writeFile(ordersDB, JSON.stringify(ordersData, null, 2), 'utf-8');
         res.status(200).json({ verified: true });
     } catch (error) {
         console.error(error.message);

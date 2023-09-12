@@ -3,14 +3,14 @@ import { useCartContext } from '../context/CartContext';
 
 function Confirmation() {
   const { setCartItems } = useCartContext();
-  const [isPaymentVerified, setIsPaymentVerified] = useState(false);
+  const [isPaymentVerified, setIsPaymentVerified] = useState(null);
 
   const verifyPayment = async () => {
     const sessionId = sessionStorage.getItem('stripe-session-id');
 
     // check if we got a sessionid first before doing a verify ect..
-    if (sessionId === null) { 
-      return 
+    if (!sessionId) {
+      return
     }
 
     const response = await fetch('/api/checkout/verify-session', {
@@ -37,7 +37,10 @@ function Confirmation() {
   }, []);
 
   return (
-    isPaymentVerified ? (<div>Tack för ditt köp!</div>) : (<div>Något gick fel med betalningen...</div>)
+    <>
+      {isPaymentVerified === true && <div>Tack för ditt köp!</div>}
+      {isPaymentVerified === false && <div>Något gick fel med betalningen...</div>}
+    </>
   )
 }
 
