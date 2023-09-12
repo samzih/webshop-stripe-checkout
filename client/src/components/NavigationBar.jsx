@@ -8,7 +8,7 @@ import { useUserContext } from '../context/UserContext';
 
 
 function NavigationBar() {
-  const { cartItems } = useCartContext();
+  const { cartItems, setCartItems } = useCartContext();
   const { showModal, setModalMode, isLoggedIn, setIsLoggedIn, userData, setUserData, logoutUser } = useUserContext();
 
   // Calculates the total quantity of items in cart
@@ -16,10 +16,15 @@ function NavigationBar() {
     return accumulator + currentItem.quantity;
   }, 0);
 
-  // const handleLogout = () => {
-  //   logoutUser();
-  //   // setUserData(null);
-  // }
+  const handleLogin = () => {
+    showModal();
+    setModalMode("login");
+  }
+
+  const handleLogout = () => {
+    logoutUser();
+    // setCartItems([]); // set the cart in LS to [] on logout
+  }
 
   return (
       <Navbar className="bg-body-tertiary mb-5">
@@ -42,14 +47,14 @@ function NavigationBar() {
                 <Dropdown.Toggle as={Nav.Link}><PiUserCircleDuotone size={25} /></Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item as={Link}>Orderhistorik</Dropdown.Item>
-                  <Dropdown.Item as={Link} onClick={logoutUser}>Logga ut</Dropdown.Item>
+                  <Dropdown.Item as={Link} onClick={handleLogout}>Logga ut</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </Stack>
             </>
           ) : 
           (
-            <Button onClick={() => { showModal(); setModalMode("login"); }}>Logga in</Button>
+            <Button onClick={handleLogin}>Logga in</Button>
           )
           }
           <div className='vr ms-3' />

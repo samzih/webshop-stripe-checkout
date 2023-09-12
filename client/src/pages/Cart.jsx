@@ -28,7 +28,8 @@ function Cart() {
           return
       }
 
-      const { url } = await response.json();
+      const { url, sessionId } = await response.json();
+      sessionStorage.setItem('stripe-session-id', sessionId);
       window.location = url;
   }
   
