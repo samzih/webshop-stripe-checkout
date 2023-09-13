@@ -40,7 +40,7 @@ function Home() {
                                     <Card.Title>{product.name}</Card.Title>
                                     <Card.Subtitle>{`${product.default_price.unit_amount / 100} kr`}</Card.Subtitle>
                                     <Card.Text>{product.description}</Card.Text>
-                                    <Button onClick={() => handleClick(product)} variant="secondary">Add to cart</Button>
+                                    <Button onClick={() => handleClick(product)} variant="secondary">Lägg i varukorg</Button>
                                 </Card.Body>
                             </Card>
                         </Col>
