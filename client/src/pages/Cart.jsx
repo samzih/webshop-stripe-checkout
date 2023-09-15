@@ -78,7 +78,7 @@ function Cart() {
           </div>
         ))}
 
-        <h1>Totalpris: {cartTotalPrice} kr</h1>
+        <h2>Totalpris: {cartTotalPrice} kr</h2>
 
 
         {userData ? 

@@ -15,6 +15,8 @@ const UserContext = createContext({
     userData: {},
     setUserData: () => {},
     logoutUser: () => {},
+    userOrders: () => {},
+    orders: [],
 });
 
 export const useUserContext = () => useContext(UserContext);
@@ -24,6 +26,7 @@ const UserProvider = ({ children }) => {
     const [modalMode, setModalMode] = useState("");
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userData, setUserData] = useLocalStorage('currentUser', null);
+    const [orders, setOrders] = useState([]);
 
     const closeModal = () => setShow(false);
     const showModal = () => setShow(true);
@@ -98,9 +101,16 @@ const UserProvider = ({ children }) => {
         }
     }
 
+    const userOrders = async () => {
+        const response = await fetch('/api/customers/orders');
+        const data = await response.json();
+        console.log(data);
+        setOrders(data);
+    }
+
     return (
         <div>
-            <UserContext.Provider value={{ show, setShow, closeModal, showModal, modalMode, setModalMode, registerUser, loginUser, isLoggedIn, setIsLoggedIn, userData, setUserData, logoutUser }}>
+            <UserContext.Provider value={{ show, setShow, closeModal, showModal, modalMode, setModalMode, registerUser, loginUser, isLoggedIn, setIsLoggedIn, userData, setUserData, logoutUser, userOrders, orders }}>
                 {children}
             </UserContext.Provider>
         </div>

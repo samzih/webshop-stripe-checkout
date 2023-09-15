@@ -3,6 +3,7 @@ const stripe = initStripe();
 const bcrypt = require('bcrypt');
 const { readFile, writeFile } = require('fs/promises');
 const usersDB = './src/db/users.json';
+const ordersDB = './src/db/orders.json';
 
 const createCustomer = async (req, res) => {
 
@@ -66,4 +67,18 @@ const logoutUser = (req, res) => {
     res.status(200).json(req.session);
 }
 
-module.exports = { createCustomer, verifyLogin, logoutUser };
+const getCustomerOrders = async (req, res) => {
+
+    const allOrders = JSON.parse(await readFile(ordersDB, 'utf-8'));
+
+    const customerOrders = allOrders.filter(order => order.customerID === req.session.id);
+
+    customerOrders.forEach(order => {
+        delete order.customerID;
+    });
+
+    res.status(200).json(customerOrders);
+
+}
+
+module.exports = { createCustomer, verifyLogin, logoutUser, getCustomerOrders };
