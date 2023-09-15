@@ -87,7 +87,7 @@ function LoginModal() {
                                             </Form.Group>
                                             <Form.Group className="mb-3">
                                                 <Form.Label>Lösenord</Form.Label>
-                                                <Form.Control required name='password' type="password" />
+                                                <Form.Control required name='password' type="password" pattern='^(?!.*\s)(.{6,15})$' title='Lösenordet måste vara 6 till 15 tecken långt och får inte innehålla mellanslag' />
                                             </Form.Group>
                                         </Form>
                                     </Modal.Body>
