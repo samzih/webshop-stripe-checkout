@@ -8,6 +8,22 @@ const ordersDB = './src/db/orders.json';
 const createCustomer = async (req, res) => {
 
     const { name, email, password } = req.body;
+
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+    // Validates name, email & password
+    if (!(name.length >= 2 && emailPattern.test(email) && password.length >= 2)) {
+        return
+    }
+
+    // Check the DB for the email to ensure it's unique
+    const users = JSON.parse(await readFile(usersDB, 'utf-8'));
+    const user = users.find(user => user.email === email);
+    if (user) {
+        res.status(409).json('Det finns redan ett konto för den här e-posten');
+        return
+    }
+
     
     const customer = await stripe.customers.create({
         name: name,
@@ -53,7 +69,8 @@ const verifyLogin = async (req, res) => {
             delete user.password;
             req.session = user;
             console.log(req.session);
-            res.status(200).json(req.session);
+            delete user.id;
+            res.status(200).json(user);
         } else {
             res.status(401).json({ message: 'Failed to login due to wrong password' });
         }
