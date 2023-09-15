@@ -62,6 +62,7 @@ const verifyStripeSession = async (req, res) => {
 
         const order = {
             customerID: session.customer,
+            orderID: (session.payment_intent).substring(3),
             name: session.customer_details.name,
             created: session.created,
             totalOrderPrice: session.amount_total / 100,
