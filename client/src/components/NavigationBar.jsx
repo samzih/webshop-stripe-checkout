@@ -5,6 +5,8 @@ import { PiUserCircleDuotone } from 'react-icons/pi';
 import logo from '../assets/company-logo.svg';
 import { useCartContext } from '../context/CartContext';
 import { useUserContext } from '../context/UserContext';
+import { AiOutlineUnorderedList} from 'react-icons/ai';
+import { TbPower } from 'react-icons/tb';
 
 
 function NavigationBar() {
@@ -46,8 +48,8 @@ function NavigationBar() {
               <Dropdown as={Nav.Item}>
                 <Dropdown.Toggle as={Nav.Link}><PiUserCircleDuotone size={25} /></Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item as={Link}>Orderhistorik</Dropdown.Item>
-                  <Dropdown.Item as={Link} onClick={handleLogout}>Logga ut</Dropdown.Item>
+                  <Dropdown.Item as={Link} to='/orders'><AiOutlineUnorderedList size={18} /> Orderhistorik</Dropdown.Item>
+                  <Dropdown.Item as={Link} onClick={handleLogout}><TbPower size={18} /> Logga ut</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </Stack>
