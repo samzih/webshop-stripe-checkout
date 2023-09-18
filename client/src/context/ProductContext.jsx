@@ -11,13 +11,11 @@ export const useProductContext = () => useContext(ProductContext);
 const ProductProvider = ({ children }) => {
     const [products, setProducts] = useState([]);
 
-    // fetch product data
+    // Fetch product data
     async function fetchProducts() {
         const response = await fetch('/api/products');
         const data = await response.json();
-        console.log('fetch product data:', data);
-
-        // set state
+        
         setProducts(data.data)
     }
 

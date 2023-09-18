@@ -32,8 +32,6 @@ const initStripeSession = async (req, res) => {
 
 const verifyStripeSession = async (req, res) => {
     try {
-        console.log(req.body.sessionId);
-
         // Retrieve a checkout session
         const session = await stripe.checkout.sessions.retrieve(req.body.sessionId);
 
@@ -68,8 +66,6 @@ const verifyStripeSession = async (req, res) => {
             totalOrderPrice: session.amount_total / 100,
             products: products, // Assign the resolved array of products
         };
-
-        console.log('order', order);
 
         // Save the order to DB
         const ordersData = JSON.parse(await readFile(ordersDB, 'utf-8'));

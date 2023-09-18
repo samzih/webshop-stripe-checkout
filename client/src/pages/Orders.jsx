@@ -11,7 +11,7 @@ function Orders() {
 
     return (
         <>
-            <Stack className='d-flex align-items-center' direction='vertical' gap={4}>
+            <Stack className='d-flex align-items-center my-5' direction='vertical' gap={4}>
                 <h1>Din orderhistorik</h1>
 
 
