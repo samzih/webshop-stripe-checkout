@@ -30,7 +30,7 @@ function Home() {
 
     return (
         <>
-            <Container>
+            <Container className='my-5'>
                 <Row xs={1} md={4} className="g-5">
                     {products.map((product, id) => (
                         <Col key={id}>
@@ -40,7 +40,7 @@ function Home() {
                                     <Card.Title>{product.name}</Card.Title>
                                     <Card.Subtitle>{`${product.default_price.unit_amount / 100} kr`}</Card.Subtitle>
                                     <Card.Text>{product.description}</Card.Text>
-                                    <Button onClick={() => handleClick(product)} variant="secondary">Lägg i varukorg</Button>
+                                    <Button onClick={() => handleClick(product)} variant='success'>Lägg i varukorg</Button>
                                 </Card.Body>
                             </Card>
                         </Col>
