@@ -8,10 +8,6 @@ function Home() {
     const { cartItems, setCartItems } = useCartContext();
 
     useEffect(() => {
-        console.log(cartItems);
-    }, [cartItems]);
-
-    useEffect(() => {
         fetchProducts();
     }, []);
 
@@ -31,11 +27,11 @@ function Home() {
     return (
         <>
             <Container className='my-5'>
-                <Row xs={1} md={4} className="g-5">
+                <Row xs={1} md={4} className='g-5'>
                     {products.map((product, id) => (
                         <Col key={id}>
                             <Card style={{ width: '18rem', height: '100%' }}>
-                                <Card.Img style={{ width: "150px" }} variant="top" src={product.images[0]} />
+                                <Card.Img style={{ width: '150px' }} variant='top' src={product.images[0]} />
                                 <Card.Body>
                                     <Card.Title>{product.name}</Card.Title>
                                     <Card.Subtitle>{`${product.default_price.unit_amount / 100} kr`}</Card.Subtitle>

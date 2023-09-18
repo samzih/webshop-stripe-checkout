@@ -39,7 +39,6 @@ const UserProvider = ({ children }) => {
 
         // Make it an object
         const formJson = Object.fromEntries(formData.entries());
-        console.log(formJson);
 
         const response = await fetch('/api/customers', {
             method: 'POST',
@@ -51,8 +50,6 @@ const UserProvider = ({ children }) => {
 
         if (response.ok) {
             closeModal();
-            const responseData = await response.json();
-            console.log(responseData);
         }
 
         if (response.status === 409) {
@@ -68,36 +65,31 @@ const UserProvider = ({ children }) => {
         const form = e.target;
         const formData = new FormData(form);
 
-        // Or you can work with it as a plain object
+        // Make it an object
         const formJson = Object.fromEntries(formData.entries());
-        console.log(formJson);
 
         const response = await fetch('/api/customers/login', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json', // Set the content type to JSON
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify(formJson), // Convert the object to JSON
+            body: JSON.stringify(formJson),
         });
 
         if (response.ok) {
             closeModal();
             const data = await response.json();
-            console.log(data);
             setUserData(data);
             setIsLoggedIn(true);
         }
     }
 
     const logoutUser = async () => {
-        console.log('User logged out');
-
         const response = await fetch('/api/customers/logout', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json', // Set the content type to JSON
+                'Content-Type': 'application/json',
             },
-            // body: JSON.stringify(formJson), // Convert the object to JSON
         });
 
         if (response.ok) {
@@ -108,7 +100,6 @@ const UserProvider = ({ children }) => {
     const userOrders = async () => {
         const response = await fetch('/api/customers/orders');
         const data = await response.json();
-        console.log(data);
         setOrders(data);
     }
 

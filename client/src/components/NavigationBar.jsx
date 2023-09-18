@@ -10,8 +10,8 @@ import { TbPower } from 'react-icons/tb';
 
 
 function NavigationBar() {
-  const { cartItems, setCartItems } = useCartContext();
-  const { showModal, setModalMode, isLoggedIn, setIsLoggedIn, userData, setUserData, logoutUser } = useUserContext();
+  const { cartItems } = useCartContext();
+  const { showModal, setModalMode, setIsLoggedIn, userData, logoutUser } = useUserContext();
 
   // Calculates the total quantity of items in cart
   const totalQuantity = cartItems.reduce((accumulator, currentItem) => {
@@ -25,20 +25,18 @@ function NavigationBar() {
 
   const handleLogout = () => {
     logoutUser();
-    // setCartItems([]); // set the cart in LS to [] on logout
   }
 
   return (
-      <Navbar className="bg-body-tertiary mb-5">
+      <Navbar className='bg-body-tertiary mb-5'>
 
-        <Container className="me-auto">
+        <Container className='me-auto'>
 
         <Navbar.Brand as={Link} to='/'>
-            <img src={logo} width="50" height="50" className="d-inline-block align-center" />
+            <img src={logo} width='50' height='50' className='d-inline-block align-center' />
             <Navbar.Text className='m-1'>Sams Hårddiskar</Navbar.Text>
         </Navbar.Brand>
 
-        {/* If the user is loggedin then show <Navbar.Text>Signed in as...</Navbar.Text> otherwise show the login btn */}
         <Nav>
           {userData ? 
           (
@@ -62,7 +60,7 @@ function NavigationBar() {
           <div className='vr ms-3' />
           <Nav.Link as={Link} to='/cart'>
             <BsCart3 size={25} />
-            <Badge bg="success" pill style={{ position: "relative", bottom: "10px", right: "15px" }}>{totalQuantity}</Badge>
+            <Badge bg="success" pill style={{ position: 'relative', bottom: '10px', right: '15px' }}>{totalQuantity}</Badge>
           </Nav.Link>
         </Nav>
 

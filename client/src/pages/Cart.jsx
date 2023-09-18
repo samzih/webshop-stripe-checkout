@@ -9,14 +9,10 @@ function Cart() {
   const { cartItems, setCartItems, cartTotalPrice } = useCartContext();
   const { userData, setModalMode, showModal } = useUserContext();
 
-  console.log(cartItems);
-
-  // stores the cart with product and quantity ready to be sent to stripe [{ product: 'price_1Nn1F5JXjIEuO6poPZjEdhCJ', quantity: 2 },]
+  // Stores the cart with product and quantity ready to be sent to stripe
   const cart = cartItems.map((item) => (
     { product: item.product.default_price.id, quantity: item.quantity }
   ));
-
-  console.log(cart);
 
   async function handlePayment() {
       const response = await fetch('/api/checkout/create-session', {
@@ -45,12 +41,12 @@ function Cart() {
     <>
     {cart.length < 1 ? 
     (
-      <Container fluid className="d-flex align-items-center justify-content-center" style={{ minHeight: '80vh' }}>
-      <Card className="text-center">
-        <Card.Header as="h5"><BsCartXFill size={50} /></Card.Header>
+      <Container fluid className='d-flex align-items-center justify-content-center' style={{ minHeight: '80vh' }}>
+      <Card className='text-center'>
+        <Card.Header as='h5'><BsCartXFill size={50} /></Card.Header>
         <Card.Body>
           <p>Din varukorg är för nuläget tom!</p>
-          <Button variant="primary" as={Link} to='/'>
+          <Button variant='primary' as={Link} to='/'>
             Fortsätt handla
           </Button>
         </Card.Body>
@@ -59,7 +55,7 @@ function Cart() {
     ) 
     : 
     (
-      <Stack className="d-flex align-items-center my-5" direction="vertical" gap={3}>
+      <Stack className='d-flex align-items-center my-5' direction='vertical' gap={3}>
 
         <h1>Din kundvagn</h1>
 
