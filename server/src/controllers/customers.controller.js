@@ -12,7 +12,7 @@ const createCustomer = async (req, res) => {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
     // Validates name, email & password
-    if (!(name.length >= 2 && emailPattern.test(email) && password.length >= 2)) {
+    if (!(name.length >= 2 && emailPattern.test(email) && password.length >= 6)) {
         return
     }
 
